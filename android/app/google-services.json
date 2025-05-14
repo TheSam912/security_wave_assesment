@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "218237534945",
+    "project_id": "woocom-365a6",
+    "storage_bucket": "woocom-365a6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218237534945:android:e0f6f733a4a56d9e95eda0",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_woocom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFsKWtNvRUWQ7LJNEgE-OrgnVhWh2n6Xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218237534945:android:b065cb87cf5608f795eda0",
+        "android_client_info": {
+          "package_name": "com.sam912.security_wave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFsKWtNvRUWQ7LJNEgE-OrgnVhWh2n6Xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,46 @@
+name: security_wave
+description: "Security wave company code assesment developed by Sobhan Daroogheh"
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ^3.7.0
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
+  go_router:
+  google_fonts:
+  image_picker: ^1.0.0
+  path: ^1.8.0
+  path_provider: ^2.0.0
+  flutter_riverpod: ^2.6.1
+  flutter_screenutil:
+  riverpod: ^2.6.1
+  flutter_slidable:
+  shared_preferences:
+
+#    Hive database dependecies
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+#  Firebase dependencies
+  firebase_auth: ^5.4.2
+  firebase_core: ^3.13.0
+  firebase_messaging:
+  cloud_firestore: ^5.6.3
+  firebase_storage:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
