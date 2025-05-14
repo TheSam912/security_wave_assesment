@@ -92,7 +92,7 @@ class AuthRepository {
         "profileImageUrl": profileImageUrl,
       });
 
-      final usersBox = Hive.box<UserModel>('usersBox');
+      final usersBox = await Hive.openBox<UserModel>('usersBox');
       final localUser = usersBox.get(uid);
 
       if (localUser != null) {
@@ -114,9 +114,9 @@ class AuthRepository {
     }
   }
 
-  Future<void> _cacheUserToHive(UserModel user) async {
-    final usersBox = Hive.box<UserModel>('usersBox');
-    await usersBox.put(user.uid, user);
+  Future<void> _cacheUserToHive(UserModel userModel) async {
+    final box = await Hive.openBox<UserModel>('usersBox');
+    await box.put(userModel.uid, userModel);
   }
 
   String _parseError(Object e) {

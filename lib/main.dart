@@ -14,15 +14,13 @@ import 'model/user_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase configuration
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // Hive configuration
   if (!kIsWeb) {
     final appDocumentDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocumentDir.path);
   } else {
-    Hive.initFlutter();
+    await Hive.initFlutter(); // FIXED
   }
 
   Hive.registerAdapter(UserModelAdapter());

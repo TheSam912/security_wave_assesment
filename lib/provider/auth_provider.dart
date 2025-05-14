@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../model/user_model.dart';
 import '../repository/auth_respository.dart';
 
@@ -13,48 +12,50 @@ final firebaseAuthProvider = Provider<FirebaseAuth>(
   (ref) => FirebaseAuth.instance,
 );
 
-final firestoreProvider = Provider<FirebaseFirestore>(
+final fireStoreProvider = Provider<FirebaseFirestore>(
   (ref) => FirebaseFirestore.instance,
 );
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(
     ref.read(firebaseAuthProvider),
-    ref.read(firestoreProvider),
+    ref.read(fireStoreProvider),
   );
 });
 
 final authStateProvider = StreamProvider<UserModel?>((ref) {
   final auth = ref.watch(firebaseAuthProvider);
-  final fireStore = ref.watch(firestoreProvider);
-  final usersBox = Hive.box<UserModel>('usersBox');
+  final fireStore = ref.watch(fireStoreProvider);
 
   return auth.authStateChanges().asyncMap((user) async {
     if (user == null) return null;
 
+    final box = await Hive.openBox<UserModel>('usersBox');
+
     try {
       final userDoc = await fireStore.collection("users").doc(user.uid).get();
-      if (!userDoc.exists) return null;
+
+      if (!userDoc.exists) {
+        return box.get(user.uid);
+      }
 
       final userModel = UserModel.fromFireStore(userDoc);
-      await usersBox.put(userModel.uid, userModel);
+      await box.put(userModel.uid, userModel);
       return userModel;
     } catch (e) {
-      return usersBox.get(user.uid);
+      // Firebase failed, try Hive
+      return box.get(user.uid);
     }
   });
 });
 
 final allUsersProvider = FutureProvider<List<UserModel>>((ref) async {
-  final usersBox = Hive.box<UserModel>('usersBox');
+  final usersBox = await Hive.openBox<UserModel>('usersBox');
 
   try {
-    // Try fetching from FireStore
     final snapshot = await FirebaseFirestore.instance.collection('users').get();
     final users =
         snapshot.docs.map((doc) => UserModel.fromFireStore(doc)).toList();
-
-    // Cache to Hive
     await usersBox.clear();
     for (var user in users) {
       await usersBox.put(user.uid, user);
@@ -66,8 +67,8 @@ final allUsersProvider = FutureProvider<List<UserModel>>((ref) async {
   }
 });
 
-final authStatusProvider = FutureProvider<bool>((ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-  return isLoggedIn;
-});
+// final authStatusProvider = FutureProvider<bool>((ref) async {
+//   final prefs = await SharedPreferences.getInstance();
+//   final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+//   return isLoggedIn;
+// });
