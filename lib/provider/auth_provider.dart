@@ -29,21 +29,16 @@ final authStateProvider = StreamProvider<UserModel?>((ref) {
 
   return auth.authStateChanges().asyncMap((user) async {
     if (user == null) return null;
-
     final box = await Hive.openBox<UserModel>('usersBox');
-
     try {
       final userDoc = await fireStore.collection("users").doc(user.uid).get();
-
       if (!userDoc.exists) {
         return box.get(user.uid);
       }
-
       final userModel = UserModel.fromFireStore(userDoc);
       await box.put(userModel.uid, userModel);
       return userModel;
     } catch (e) {
-      // Firebase failed, try Hive
       return box.get(user.uid);
     }
   });
@@ -51,7 +46,6 @@ final authStateProvider = StreamProvider<UserModel?>((ref) {
 
 final allUsersProvider = FutureProvider<List<UserModel>>((ref) async {
   final usersBox = await Hive.openBox<UserModel>('usersBox');
-
   try {
     final snapshot = await FirebaseFirestore.instance.collection('users').get();
     final users =
@@ -60,7 +54,6 @@ final allUsersProvider = FutureProvider<List<UserModel>>((ref) async {
     for (var user in users) {
       await usersBox.put(user.uid, user);
     }
-
     return users;
   } catch (e) {
     return usersBox.values.toList();
