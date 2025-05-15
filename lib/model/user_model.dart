@@ -43,6 +43,13 @@ class UserModel extends HiveObject {
     };
   }
 
+  Map<String, dynamic> toJson() => {
+    'uid': uid,
+    'email': email,
+    'profileImageUrl': profileImageUrl,
+    'role': role,
+  };
+
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map['uid'] ?? '',

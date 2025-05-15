@@ -9,10 +9,10 @@ import '../../provider/auth_provider.dart';
 import '../dialogs/w_delete_dialog.dart';
 import '../dialogs/w_update_dialog.dart';
 
-class UserBox extends ConsumerWidget {
+class UserItemTile extends ConsumerWidget {
   final UserModel user;
 
-  const UserBox({required this.user, super.key});
+  const UserItemTile({required this.user, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
