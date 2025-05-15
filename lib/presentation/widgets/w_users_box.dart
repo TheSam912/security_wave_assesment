@@ -26,7 +26,7 @@ class UserBox extends ConsumerWidget {
                 context,
                 uid: user.uid,
                 initialEmail: user.email,
-                profileImageUrl: user.profileImageUrl ?? '',
+                profileImageUrl: user.profileImageUrl,
                 onUpdate: (email, newImageUrl) async {
                   try {
                     await ref
@@ -102,8 +102,8 @@ class UserBox extends ConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 12),
-              child: Icon(Icons.keyboard_arrow_right,color: AppColors.primary,),
-            )
+              child: Icon(Icons.keyboard_arrow_right, color: AppColors.primary),
+            ),
           ],
         ),
       ),

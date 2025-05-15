@@ -10,10 +10,10 @@ import '../dialogs/w_delete_dialog.dart';
 import '../dialogs/w_update_dialog.dart';
 
 Widget userCard(
-    BuildContext context,
-    WidgetRef ref,
-    AsyncValue<UserModel?> authState,
-    ) {
+  BuildContext context,
+  WidgetRef ref,
+  AsyncValue<UserModel?> authState,
+) {
   return authState.when(
     data: (user) {
       if (user == null) return const Text("Not logged in");
@@ -46,8 +46,8 @@ Widget userCard(
     },
     loading:
         () => const Center(
-      child: CircularProgressIndicator(color: AppColors.primary),
-    ),
+          child: CircularProgressIndicator(color: AppColors.primary),
+        ),
     error: (e, _) => Text("Error: $e"),
   );
 }
@@ -65,26 +65,26 @@ Widget _userAvatar(String? imageUrl) {
 }
 
 SlidableAction _editAction(
-    BuildContext context,
-    WidgetRef ref,
-    UserModel user,
-    ) {
+  BuildContext context,
+  WidgetRef ref,
+  UserModel user,
+) {
   return SlidableAction(
     onPressed: (context) {
       showUpdateProfileDialog(
         context,
         uid: user.uid,
         initialEmail: user.email,
-        profileImageUrl: user.profileImageUrl ?? '',
+        profileImageUrl: user.profileImageUrl,
         onUpdate: (email, newImageUrl) async {
           try {
             await ref
                 .read(authRepositoryProvider)
                 .updateUserProfile(
-              uid: user.uid,
-              email: email,
-              profileImageUrl: newImageUrl,
-            );
+                  uid: user.uid,
+                  email: email,
+                  profileImageUrl: newImageUrl,
+                );
             print("User updated.");
           } catch (e) {
             print("Update failed: $e");
@@ -100,10 +100,10 @@ SlidableAction _editAction(
 }
 
 SlidableAction _deleteAction(
-    BuildContext context,
-    WidgetRef ref,
-    UserModel user,
-    ) {
+  BuildContext context,
+  WidgetRef ref,
+  UserModel user,
+) {
   return SlidableAction(
     onPressed: (context) {
       showDeleteConfirmationDialog(context, () async {

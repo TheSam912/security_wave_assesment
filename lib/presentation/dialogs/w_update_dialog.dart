@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import '../../core/app_colors.dart';
@@ -22,17 +21,12 @@ void showUpdateProfileDialog(
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile == null) return;
-
-    final file = File(pickedFile.path);
     final fileName = path.basename(pickedFile.path);
 
     final ref = FirebaseStorage.instance.ref().child(
       'profile_images/$uid/$fileName',
     );
-
-    final uploadTask = await ref.putFile(file);
     final downloadUrl = await ref.getDownloadURL();
-
     imageUrl = downloadUrl;
   }
 

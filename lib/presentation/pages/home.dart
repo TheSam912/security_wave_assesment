@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:security_wave/model/user_model.dart';
 import 'package:security_wave/presentation/widgets/w_users_box.dart';
 import '../../core/app_colors.dart';
 import '../../core/app_text_styles.dart';
 import '../../provider/auth_provider.dart';
 import '../dialogs/w_edit_bottom_sheet.dart';
-import '../widgets/w_user_card.dart';
 
 class Home_Page extends ConsumerStatefulWidget {
   const Home_Page({super.key});
@@ -141,30 +139,4 @@ class _Home_PageState extends ConsumerState<Home_Page> {
       ),
     );
   }
-
-  _customAppBar() => AppBar(
-    backgroundColor: AppColors.primary,
-    foregroundColor: Colors.white,
-    actions: [
-      Padding(
-        padding: const EdgeInsets.only(right: 8.0),
-        child: Row(
-          children: [
-            Text(
-              "LogOut",
-              style: AppTextStyles.dynamicStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            IconButton(
-              onPressed: () => ref.read(authRepositoryProvider).signOut(),
-              icon: Icon(Icons.logout, color: Colors.white),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
 }
