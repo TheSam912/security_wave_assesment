@@ -6,6 +6,7 @@ import 'package:security_wave/presentation/widgets/w_users_box.dart';
 import '../../core/app_colors.dart';
 import '../../core/app_text_styles.dart';
 import '../../provider/auth_provider.dart';
+import '../dialogs/w_download_image_dialog.dart';
 import '../dialogs/w_edit_bottom_sheet.dart';
 
 class Home_Page extends ConsumerStatefulWidget {
@@ -46,13 +47,20 @@ class _Home_PageState extends ConsumerState<Home_Page> {
                       alignment: Alignment.topCenter,
                       child: Column(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(200),
-                            child: CachedNetworkImage(
-                              imageUrl: user.profileImageUrl,
-                              fit: BoxFit.cover,
-                              width: 100,
-                              height: 100,
+                          GestureDetector(
+                            onTap:
+                                () => downloadImageDialog(
+                                  context,
+                                  user.profileImageUrl,
+                                ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(200),
+                              child: CachedNetworkImage(
+                                imageUrl: user.profileImageUrl,
+                                fit: BoxFit.cover,
+                                width: 100,
+                                height: 100,
+                              ),
                             ),
                           ),
                           SizedBox(height: 10),
