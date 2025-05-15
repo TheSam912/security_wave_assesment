@@ -74,26 +74,36 @@ class UserBox extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white70,
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.white70,
+                    backgroundImage: NetworkImage(user.profileImageUrl),
+                  ),
+                ),
+                Text(
+                  user.email,
+                  style: AppTextStyles.dynamicStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ],
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white70,
-                backgroundImage: NetworkImage(user.profileImageUrl),
-              ),
-            ),
-            Text(
-              user.email,
-              style: AppTextStyles.dynamicStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
-              ),
-            ),
+              padding: const EdgeInsets.only(right: 12),
+              child: Icon(Icons.keyboard_arrow_right,color: AppColors.primary,),
+            )
           ],
         ),
       ),
