@@ -2,6 +2,11 @@
 
 Security wave company code assesment developed by Sobhan Daroogheh
 ## screen shots
+## On Boarding screen
+<p align="center">
+  <img src="assets/images/onboarding.jpg" width="200"/>
+</p>
+
 ### 🔐 Authentication Flow
 
 <p align="center">
@@ -16,6 +21,11 @@ Security wave company code assesment developed by Sobhan Daroogheh
   <img src="assets/images/database.jpg" width="200"/>
   <img src="assets/images/edituser.jpg" width="200"/>
   <img src="assets/images/editdialog.jpg" width="200"/>
+</p>
+
+## Firestore data collection users
+<p align="center">
+  <img src="assets/images/firestore.jpg" width="200"/>
 </p>
 
 ## Getting Started
