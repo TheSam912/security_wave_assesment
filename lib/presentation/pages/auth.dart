@@ -36,18 +36,14 @@ class _AuthenticationMobileState extends ConsumerState<Authentication_Page>
       ..addListener(() => setState(() {}));
   }
 
-  Future<void> _login(String type) async {
-    final email =
-        type == "admin"
-            ? _adminEmailController.text.trim()
-            : _emailController.text.trim();
-    final password =
-        type == "admin"
-            ? _adminPasswordController.text.trim()
-            : _passwordController.text.trim();
+  Future<void> _login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
     try {
       await ref.read(authRepositoryProvider).signIn(email, password);
+      _showSnackBar("Login successful!");
+      clearAll();
     } catch (e) {
       _showSnackBar(e.toString());
     }
@@ -70,6 +66,7 @@ class _AuthenticationMobileState extends ConsumerState<Authentication_Page>
       if (user != null) {
         _showSnackBar("Registration successful!");
         setState(() => _isLogin = true);
+        clearAll();
       }
     } catch (e) {
       _showSnackBar(e.toString());
@@ -86,6 +83,14 @@ class _AuthenticationMobileState extends ConsumerState<Authentication_Page>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  void clearAll() {
+    _emailController.clear();
+    _passwordController.clear();
+    _confirmPasswordController.clear();
+    _adminEmailController.clear();
+    _adminPasswordController.clear();
   }
 
   @override
@@ -253,10 +258,7 @@ class _AuthenticationMobileState extends ConsumerState<Authentication_Page>
   Widget _actionButton(bool isTablet) {
     return _buttonWidget(
       _isLogin ? "Login Now" : "Sign Up Now",
-      () =>
-          _isLogin
-              ? _login(_tabController.index == 1 ? "admin" : "user")
-              : _register(),
+      () => _isLogin ? _login() : _register(),
       true,
       isTablet,
     );
