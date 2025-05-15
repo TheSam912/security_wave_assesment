@@ -1,6 +1,14 @@
-# security_wave
+# security_wave company code assesment
 
 Security wave company code assesment developed by Sobhan Daroogheh
+## screen shots
+### 🔐 Authentication Flow
+
+<p align="center">
+  <img src="assets/images/login.jpg" width="200"/>
+  <img src="assets/images/signup.jpg" width="200"/>
+  <img src="assets/images/forget.jpg" width="200"/>
+</p>
 
 ## Getting Started
 
