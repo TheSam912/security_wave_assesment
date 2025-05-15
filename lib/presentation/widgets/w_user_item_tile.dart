@@ -37,6 +37,7 @@ class UserItemTile extends ConsumerWidget {
                           profileImageUrl: newImageUrl,
                         );
                     print("User updated.");
+                    ref.invalidate(allUsersProvider);
                   } catch (e) {
                     print("Update failed: $e");
                   }
@@ -56,6 +57,7 @@ class UserItemTile extends ConsumerWidget {
                       .read(authRepositoryProvider)
                       .deleteUserById(user.uid);
                   print('User deleted');
+                  ref.invalidate(allUsersProvider);
                 } catch (e) {
                   print("Delete failed: $e");
                 }
