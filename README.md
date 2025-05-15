@@ -10,6 +10,14 @@ Security wave company code assesment developed by Sobhan Daroogheh
   <img src="assets/images/forget.jpg" width="200"/>
 </p>
 
+## Home page and features
+<p align="center">
+  <img src="assets/images/home.jpg" width="200"/>
+  <img src="assets/images/database.jpg" width="200"/>
+  <img src="assets/images/edituser.jpg" width="200"/>
+  <img src="assets/images/editdialog.jpg" width="200"/>
+</p>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
